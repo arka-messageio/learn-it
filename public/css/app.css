@@ -1,0 +1,196 @@
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing,
+.footer {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+/* Custom page header */
+.header {
+  padding-bottom: 20px;
+  border-bottom: 10px solid #000000;
+}
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 40px;
+}
+
+/* Custom page footer */
+.footer {
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #000000;
+}
+
+/* Customize container */
+@media (min-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+}
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+/* Supporting marketing content */
+.marketing {
+  margin: 40px 0;
+}
+.marketing p + h4 {
+  margin-top: 28px;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  /* Remove the padding we set earlier */
+  .header,
+  .marketing,
+  .footer {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+body {
+  background: url("https://cdn.glitch.com/1d239c36-6ae9-4f33-b667-6a11a6c3fdee%2Fredd-angelo-12845.jpg?1500938060078") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size:    cover;
+  -o-background-size:      cover;
+  background-size:         cover;
+}
+
+h1 {
+  text-transform: lowercase;
+  font-family: "Comfortaa", cursive;
+}
+
+.header {
+  padding-top:   20px;
+  padding-left:  20px;
+  padding-right: 20px;
+  
+  position: relative;
+  
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.header a {
+  color: #ffffff;
+}
+
+.nav {
+  position: absolute;
+  bottom: 30px;
+  right: 20px;
+}
+
+.nav > li > a {
+  color: #ffffff;
+}
+
+.nav > li.open > a,
+.nav > li > a:focus,
+.nav > li > a:hover {
+  color: #000000;
+}
+
+main, footer {
+  background-color: #ffffff;
+}
+
+footer.footer {
+  border-top: 1px solid lightgray;
+}
+
+footer p {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+}
+
+.content {
+  padding: 30px;
+}
+
+.radio label {
+  width: 100%;
+}
+
+.ui-autocomplete {
+  max-height: 300px;
+  overflow-y: auto;
+  /* prevent horizontal scrollbar */
+  overflow-x: hidden;
+  z-index: 1051 !important;
+}
+
+.monospace {
+  font-family: monospace;
+}
+
+.unimportant-info {
+  color: gray;
+  margin-top: 15px;
+  font-style: italic;
+}
+
+.progress-bar-0 {
+  background-color: #d9534f;
+}
+
+.progress-bar-1 {
+  background-color: #f0ad4e;
+}
+
+.progress-bar-2 {
+  background-color: #f0f04e;
+}
+
+.progress-bar-3 {
+  background-color: #337ab7;
+}
+
+.progress-bar-4 {
+  background-color: #5bc0de;
+}
+
+.progress-bar-5 {
+  background-color: #5cb85c;
+}
+
+h4 {
+  padding-bottom: 15px;
+}
+
+.panel {
+  margin-bottom: 0px;
+  margin-top: 20px;
+}
+
+.ui-autocomplete-loading {
+  background: url("https://cdn.glitch.com/1d239c36-6ae9-4f33-b667-6a11a6c3fdee%2Floading.gif?1501347833724") no-repeat right center;
+}
+
+.havent-started-set {
+  text-align: center;
+  color: black;
+  font-style: italic;
+}
+
+.class-code {
+  font-family: monospace;
+  vertical-align: middle;
+  font-weight: bold;
+  font-size: 14pt;
+}
+
+a.toggle-graph {
+  color: #333333;
+}
+
+canvas.progress-graph {
+  display: block;
+}

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Teacher's Lounge – 📖 Learn It!</title>
+
+    <!-- Bootstrap. -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet"> 
+    <link rel="stylesheet" href="/css/app.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="modal fade" id="create-class-modal" tabindex="-1" role="dialog" aria-labelledby="create-class-modal-title">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="create-class-modal-title">Create a class</h4>
+          </div>
+          <div class="modal-body">
+            <label for="class-name">Class name</label>
+            <input id="class-name" type="text" class="form-control" placeholder="Enter a name for this class...">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button id="create-class-button" type="button" class="btn btn-info">Create</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="modal fade" id="assign-set-modal" tabindex="-1" role="dialog" aria-labelledby="assign-set-modal-title">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="assign-set-modal-title">Create a class</h4>
+          </div>
+          <div class="modal-body">
+            <div class="dropdown">
+              <button class="btn btn-default dropdown-toggle" type="button" id="assign-set-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Assign one of your sets to your students...
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="assign-set-menu" id="assign-set-menu-list">
+                <% sets.forEach(function(set) { %>
+                  <li><a href="#"><%= set.label %></a></li>
+                <% }); %>
+              </ul>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button id="assign-set-button" type="button" class="btn btn-info">Assign</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="container">
+      <%- include header %>
+      
+      <main class="content">
+        <h2>
+          <button type="submit" class="btn btn-info pull-right with-tooltip" data-toggle="modal" data-target="#create-class-modal" title="Create a class..." data-placement="left"><span class="glyphicon glyphicon-plus"></span></button>
+          Your classes
+        </h2>
+        <div id="classes">
+          <% if (classes.length === 0) { %>
+            <span class="unimportant-info">You haven't created any classes yet.</span>
+          <% } %>
+          <% classes.forEach(function(clazz) { %>
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab">
+                <button type="button" class="close" aria-label="Delete"><span aria-hidden="true">&times;</span></button>
+                <h3 class="panel-title">
+                  <a role="button" data-toggle="collapse" aria-expanded="true">
+                    <%= clazz.label %>
+                  </a>
+                </h3>
+              </div>
+              <div class="panel-collapse collapse in" role="tabpanel">
+                <div class="panel-body">
+                  <p>
+                    Tell your students to sign up for with this class code: <span class="class-code"><%= clazz.classCode %></span>.
+                  </p>
+                  <hr>
+                  <h4>
+                    <button type="submit" class="btn btn-info pull-right assign-set-plus-button with-tooltip" data-toggle="modal" data-label="<%= clazz.label %>" title="Assign a set to this class..." data-placement="left"><span class="glyphicon glyphicon-plus"></span></button>
+                    Assigned sets
+                  </h4>
+                  <% clazz.assignedSetsLabels.forEach(function(setLabel) { %>
+                    <div class="panel panel-default">
+                      <div class="panel-heading" role="tab">
+                        <button type="button" class="close" aria-label="Delete"><span aria-hidden="true">&times;</span></button>
+                        <h5 class="panel-title">
+                          <a role="button" data-toggle="collapse" aria-expanded="true">
+                            <%= setLabel %>
+                          </a>
+                        </h5>
+                      </div>
+                      <div class="panel-collapse collapse in" role="tabpanel">
+                        <div class="panel-body">
+                          <% clazz.studentsAssignedSets[setLabel].forEach(function(student) { %>
+                            <% var set = student.set; %>
+                            <% set.label = student.student.displayName; %>
+                            <% console.log(JSON.stringify(set.progress)); %>
+                            <%- include("set-progress", {
+                              set: set,
+                              deleteable: true
+                            }); %>
+                          <% });%>
+                        </div>
+                      </div>
+                    </div>
+                  <% }); %>
+                </div>
+              </div>
+            </div>
+          <% }); %>
+        </div>
+      </main>
+    
+      <%- include footer %>
+    </div>
+    
+    <!-- jQuery. -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    
+    <!-- Bootstrap JavaScript. -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    
+    <!-- Chart.js and Moment.js bundle. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js" integrity="sha256-VNbX9NjQNRW+Bk02G/RO6WiTKuhncWI4Ey7LkSbE+5s=" crossorigin="anonymous"></script>
+    
+    <script>
+      $(document).ready(function() {
+        $("#create-class-button").click(function() {
+          $.ajax({
+            method: "POST",
+            url: "/api/classes/" + encodeURIComponent($("#class-name").val()),
+            success: function() {
+              location.reload(true);
+            }
+          });
+        });
+        
+        // TODO Allow deleting sets and classes.
+        
+        $("#assign-set-menu-list li a").click(function() {
+          $("#assign-set-menu").val($(this).text());
+          $("#assign-set-menu").html($(this).text() + " <span class=\"caret\"></span>");
+        });
+        var currentlyAssigningClass;
+        $(".assign-set-plus-button").click(function() {
+          currentlyAssigningClass = $(this).data("label");
+          $("#assign-set-modal").modal();
+        });
+        $("#assign-set-button").click(function() {
+          $.ajax({
+            method: "POST",
+            url: "/api/classes/" + encodeURIComponent(currentlyAssigningClass) + "/assign",
+            data: {
+              setLabel: $("#assign-set-menu").val()
+            },
+            success: function() {
+              location.reload(true);
+            }
+          });
+        });
+        
+        $(".with-tooltip").tooltip();
+      });
+    </script>
+    
+    <script src="/js/progress-graph.js"></script>
+  </body>
+</html>

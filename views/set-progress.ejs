@@ -1,0 +1,46 @@
+<div class="panel panel-default set-panel" data-label="<%= set.label %>" data-progress='<%= JSON.stringify(set.progress) %>'>
+  <div class="panel-heading">
+    <% if (deleteable) { %>
+      <button type="button" class="close with-tooltip" title="Delete" data-placement="left"><span aria-hidden="true">&times;</span></button>
+    <% } %>
+    <h3 class="panel-title">
+      <a role="button" data-toggle="collapse" aria-expanded="true">
+        <%= set.label %>
+      </a>
+    </h3>
+  </div>
+  <div class="panel-collapse collapse in" role="tabpanel">
+    <div class="panel-body">
+      <label>Progress</label>
+      <div class="progress">
+        <% var latestProgress = set.progress[set.progress.length - 1]; %>
+        <% var something = false; %>
+        <% for (var i = 0; i <= 5; i++) { %>
+          <div class="progress-bar progress-bar-<%= i %>" style="width: <%= (latestProgress.qualities[i] / latestProgress.total) * 100 %>%">
+            <% if (latestProgress.qualities[i] !== 0) { %>
+              <% something = true; %>
+              <% if (i === 0) { %>
+                Complete blackout
+              <% } else if (i === 5) {%>
+                Perfect!
+              <% } %>
+            <% }%>
+          </div>
+        <% }%>
+        <% if (!something) { %>
+          <div class="havent-started-set">
+            You haven't started this set yet.
+          </div>
+        <% } %>
+      </div>
+      <span class="glyphicon glyphicon-chevron-right toggle-graph-chevron"></span> <a class="toggle-graph">Toggle graph</a>
+      <div>
+        <div class="progress-graph" style="display: none;">
+           <canvas class="progress-graph-canvas"></canvas>
+        </div>
+      </div>
+      <br>
+      <button type="button" class="btn btn-warning btn-sm study-set-button" data-toggle="popover" title="Note" data-content="Check your Cisco Spark for new messages now 😉.">Study</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<header class="header clearfix">
+  <nav>
+    <ul class="nav nav-pills">
+      <% if (!user) { %>
+        <li role="presentation">
+          <a href="/login">
+            <span class="glyphicon glyphicon-log-in"></span> Log In with Cisco Spark
+          </a>
+        </li>
+      <% } else { %>
+        <li role="presentation">
+          <a href="/teachers-lounge">
+            <span class="glyphicon glyphicon-sunglasses"></span> Teacher's Lounge
+          </a>
+        </li>
+        <li role="presentation">
+          <a href="/sets">
+            <span class="glyphicon glyphicon-th-large"></span> Sets
+          </a>
+        </li>
+      <% } %>
+      <li role="presentation">
+        <a href="/help">
+          <span class="glyphicon glyphicon-question-sign"></span> Help
+        </a>
+      </li>
+      <% if (user) { %>
+        <li role="presentation" class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+            <span class="glyphicon glyphicon-user"></span> <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="#">
+                <strong>
+                  Welcome, <%= user.displayName %>!
+                </strong>
+              </a>
+            </li>
+            <li role="separator" class="divider"></li>
+            <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+          </ul>
+        </li>
+      <% } %>
+    </ul>
+  </nav>
+  <h1 class="text-muted">
+    <a href="/">📖 Learn It!</a>
+  </h1>
+</header>

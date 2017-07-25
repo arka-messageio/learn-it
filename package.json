@@ -1,0 +1,43 @@
+{
+  "name": "learn-it",
+  "version": "1.0.0",
+  "description": "Chatbot that will listen to your problems and file help desk tickets for them",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.15.3",
+    "botkit": "^0.5.5",
+    "apiai": "^4.0.3",
+    "ejs": "^2.5.6",
+    "body-parser": "^1.17.2",
+    "uuid": "^3.1.0",
+    "cheerio": "^1.0.0-rc.2",
+    "recitus-core": "^0.1.4",
+    "passport": "^0.3.2",
+    "passport-oauth": "^1.0.0",
+    "ciscospark": "^1.4.0",
+    "express-session": "^1.15.4",
+    "cookie-parser": "^1.4.3",
+    "mkdirp": "^0.5.1",
+    "fs-extra": "^4.0.0"
+  },
+  "engines": {
+    "node": "6.10.x"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/learn-it"
+  },
+  "author": "Arka Majumdar <arka@message.io>",
+  "keywords": [
+    "node",
+    "glitch",
+    "express",
+    "chatbot",
+    "bot",
+    "ai",
+    "api.ai",
+    "botkit"
+  ]
+}
